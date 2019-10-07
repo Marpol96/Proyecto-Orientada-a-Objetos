@@ -1,0 +1,88 @@
+//Martin Paul Leiva Cruz 0318199600910
+
+Codigo de la clase Player Bob
+________________________
+package Main
+//Martin Paul Leiva Cruz 0318199600910
+import java.awt.image.BandCombineOp
+import java.util.*
+import kotlin.collections.ArrayList
+
+// Clase jugador
+class PlayerBob(val name: String, var sed: Int , var fatiga: Int, var oro: Int) {
+    lateinit var lugar: String
+    var Banco: Int = 0
+
+    fun show() {
+        println("""
+            ombre: $name
+            sed: $sed
+            fatiga: $fatiga
+            oro: $oro
+            """.trimIndent())
+    }
+
+    override fun toString(): String {
+            var l = Random().nextInt(4) + 1
+
+            if (oro == 3) {
+                l = 2
+            } else if (sed >= 5) {
+                l = 3
+            } else if (fatiga>=8)
+                   if (fatiga == 10) {
+                l = 4
+            }else if(fatiga<8){
+                l=1
+            }
+            if (l == 1) {
+                lugar = "MINA"
+                println("De Regreso A La $lugar de oro.")
+                println("Recolectando una pepita .")
+                oro = oro + 1
+                fatiga = fatiga + 2
+                sed = sed + 1
+            } else if (l == 2) {
+                lugar = "BANCO"
+                Banco=Banco+oro
+                oro = 0
+                println("Voy Al $lugar ,Si Dios. ESTADO CUENTA: $Banco")
+            } else if (l == 3) {
+                lugar = "TABERNA"
+                if(sed<0){
+                    sed=0
+                }else {
+                    sed = sed - 5
+                }
+                println("Hombre Ire A la $lugar .")
+            } else if (l == 4) {
+                lugar = "HOGAR"
+                fatiga = 0
+                println("De Camino A Mi $lugar .")
+                println("ZzzZZzzzZ...")
+            }
+            println("_____________________________________________")
+            return "El $name, sed: $sed, fatiga: $fatiga, oro: $oro"
+    }
+
+}
+______________________
+codigo del main
+______________________
+
+package Main
+//Martin Paul Leiva Cruz 0318199600910
+import java.util.*
+fun main(args: Array<String>) {
+    val s = 0
+    val f: Int = Random().nextInt(5)+1
+    val o: Int = Random().nextInt(3)+1
+
+    val g = PlayerBob(name = "Minero Bob", sed= s, fatiga= f, oro= o)
+    g.show()
+    var i=0
+    while (i!=1) {
+        println(g)
+        Thread.sleep(1000)
+    }
+}
